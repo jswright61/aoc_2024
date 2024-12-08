@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 require "pry"
 require "date"
-
+require_relative "./lib/answer"
 sample = false
 day = nil
 ARGV.each do |arg|
@@ -22,4 +22,5 @@ end
 IN_LINES = File.readlines(input_file).map {|ln| ln.strip}
 puts "#{IN_LINES.count} lines imported"
 SAMPLE_LINES = IN_LINES.sample(20)
+
 require "./lib/day_#{day}.rb"
