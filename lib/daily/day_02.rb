@@ -1,3 +1,8 @@
+ans_1 =  Answer.new(564, descr: "Number of safe Records")
+ans_2 =Answer.new(604, descr: "Safe records plus dampened safe recors")
+
+
+
 def safe?(arr)
   ascending = nil
   (1...arr.count).each do |idx|
@@ -18,7 +23,7 @@ def safe?(arr)
       end
     end
   end
-  return [true, arr]
+  [true, arr]
 end
 
 def try_minus_1(in_arr)
@@ -29,16 +34,15 @@ def try_minus_1(in_arr)
       return [true, in_arr, arr]
     end
   end
-  return [false, in_arr, []]
+  [false, in_arr, []]
 end
-
 
 safe_recs = []
 damp_recs = []
 bad_recs = []
 
-File.readlines("input/day_02.txt").each do |line|
-  ln = line.split().map(&:to_i)
+line_data.each do |line|
+  ln = line.split.map(&:to_i)
   rslt = safe?(ln)
   if rslt[0]
     safe_recs << rslt
@@ -51,8 +55,6 @@ File.readlines("input/day_02.txt").each do |line|
     end
   end
 end
-puts "Answer part 1: #{safe_recs.count}"
-puts "Answer part 2: #{safe_recs.count + damp_recs.count}"
-if safe_recs.count != 564 || safe_recs.count + damp_recs.count != 604
-  binding.pry if !@jsw_skip_pry
-end
+
+binding.pry unless ans_1.check(safe_recs.count)
+binding.pry unless ans_2.check(safe_recs.count + damp_recs.count)

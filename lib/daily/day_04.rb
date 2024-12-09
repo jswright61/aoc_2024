@@ -1,13 +1,16 @@
-LINES = IN_LINES.map(&:chars)
+ans_1 = Answer.new(2500, descr: "XMAS found")
+ans_2 = Answer.new(1933, descr: "MAS Exes found")
+
+LINES = line_data.map(&:chars)
 # Prepend new line so that going up from first row (prev 0 - 1) goes to this row instead of -1 which would be the last row
 # avoids having to code a special case for the first row for row zero
 # LINES.unshift(Array.new(LINES[0].count) { "Z" })
-LINES.unshift(Array.new(LINES[0].count) {"."})
+LINES.unshift(Array.new(LINES[0].count) { "." })
 
-#same principle: Avoids having to code special case for col[0]
-LINES.each {|l| l.unshift(nil)}
+# same principle: Avoids having to code special case for col[0]
+LINES.each { |l| l.unshift(nil) }
+
 ALL_DIRECTIONS = [:up, :down, :left, :right, :dul, :dur, :dll, :dlr].freeze
-
 
 VALID_CROSS_DIRS = [:dll, :dlr, :dul, :dur].freeze
 
@@ -48,11 +51,7 @@ def xmas_continues(letter, ln_num, col_num, word_dir)
     end
   elsif letter == "A"
     next_coord = next_coord(word_dir, ln_num, col_num)
-    if LINES.dig(*next_coord) == "S"
-      true
-    else
-      false
-    end
+    LINES.dig(*next_coord) == "S"
   else
     false
   end
@@ -78,12 +77,12 @@ LINES.each_with_index do |ln, line_num|
         if LINES.dig(*a_coord) == "A"
           s_coord = next_coord(try_dir, *a_coord)
           if LINES.dig(*s_coord) == "S"
-             prev = mas_for_x_found.select {|el| el[0] == a_coord}.dig(0,1)
-             if prev
-               prev << try_dir
-             else
-               mas_for_x_found << [a_coord, [try_dir]]
-             end
+            prev = mas_for_x_found.select { |el| el[0] == a_coord }.dig(0, 1)
+            if prev
+              prev << try_dir
+            else
+              mas_for_x_found << [a_coord, [try_dir]]
+            end
           end
         end
       end
@@ -91,12 +90,7 @@ LINES.each_with_index do |ln, line_num|
   end
 end
 
-mas_for_x_found.select! {|el| el[1].count > 1}
+mas_for_x_found.select! { |el| el[1].count > 1 }
 
-
-puts "XMAS was found #{xmas_found} times"
-puts "#{mas_for_x_found.count} MAS crosses were found"
-
-if xmas_found != 2500 || mas_for_x_found.count != 1933
-  binding.pry if !@jsw_skip_pry
-end
+binding.pry unless ans_1.check(xmas_found)
+binding.pry unless ans_2.check(mas_for_x_found.count)

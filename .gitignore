@@ -1,3 +1,2 @@
-input/*
-samples/*
+data/live/*
 !.keep

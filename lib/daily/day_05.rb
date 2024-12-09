@@ -2,7 +2,6 @@ require "json"
 ans_1 = Answer.new(5509, descr: "Sum of mid element from valid manuals")
 ans_2 = Answer.new(4407, descr: "Sum of mid element from corrected manuals")
 
-
 key_must_come_after_array_h = {}
 key_must_come_before_array_h = {}
 manuals = []
@@ -16,8 +15,7 @@ class Ts
   # I ran someone else's code from their GH repo to get the right answer
   # https://github.com/ozyborg/advent-of-code
   # I exported the corrected manuals from that process to json and import them here for comparison
-  @@corrected_manuals = JSON.parse(File.read("samples/day_05_corrected_manuals.json"))
-
+  @@corrected_manuals = JSON.parse(File.read("data/live/day_05_corrected_manuals.json"))
 
   class << self
     def sorted_correctly?(kmc_b4_arr, test_num, debug = true)
@@ -53,23 +51,21 @@ class Ts
     def check_bad_manuals(bad_manuals, page_order)
       out_of_order = []
       bad_manuals.each_with_index do |man, idx|
-        order = man[1].map {|e| page_order.index(e) }
-          if order.sort != order
-            out_of_order << man
-            puts "man #{idx} not sorted: #{order}"
-          end
+        order = man[1].map { |e| page_order.index(e) }
+        if order.sort != order
+          out_of_order << man
+          puts "man #{idx} not sorted: #{order}"
+        end
       end
       out_of_order
     end
   end
 end
 
-
-
 def sort_pages(key_must_come_before_array_h, all_pages)
   # extras account for page numbers for which there's no rule defined
   extras = {}
-  all_pages.each {|pg| extras[pg] = []}
+  all_pages.each { |pg| extras[pg] = [] }
   # Add the extras and convert the merged hash to an array because hash keys cannot be reordered
   combined_hash = extras.merge(key_must_come_before_array_h)
   sortable_array = combined_hash.to_a
@@ -104,10 +100,7 @@ end
 #   all_pages
 # end
 
-
-
-
-IN_LINES.each do |ln|
+line_data.each do |ln|
   if process_rules && ln.empty?
     process_rules = false
   elsif process_rules
@@ -129,7 +122,7 @@ IN_LINES.each do |ln|
 end
 
 all_pages = []
-manuals.each {|man| all_pages = all_pages | man}
+manuals.each { |man| all_pages |= man }
 
 good_manuals = []
 bad_manuals = []
@@ -166,7 +159,6 @@ all_pages.sort!
 binding.pry unless ans_1.check(good_mid_page_sum)
 binding.pry unless ans_2.check(bad_mid_page_sum)
 
-
 out_of_order = Ts.check_bad_manuals(bad_manuals, page_order)
 puts "Out of order: #{out_of_order}"
 
@@ -174,7 +166,7 @@ bad_manuals.each_with_index do |man, idx|
   man << Ts.corrected_manuals[idx]
 end
 
-verified_mans = bad_manuals.select {|man| man[1][..-2] == man[2]}
+bad_manuals.select { |man| man[1][..-2] == man[2] }
 # puts incorrect_mans
 
 # puts "Answer 2 must be less than 4834"

@@ -2,7 +2,7 @@
 require "pry"
 require "json"
 def input
-  File.read('./input/day_05.txt')
+  File.read("./input/day_05.txt")
 end
 
 def data
@@ -30,8 +30,8 @@ def part_2
     man.combination(2).all? { |combo| rules.include?(combo) }
   end
   repaired_manuals = bad_manuals.map do |bad_man|
-     bad_man.permutation(2).select { |perm| rules.include?(perm) }
-            .map(&:first).tally.sort_by(&:last).map(&:first).reverse
+    bad_man.permutation(2).select { |perm| rules.include?(perm) }
+      .map(&:first).tally.sort_by(&:last).map(&:first).reverse
   end
   binding.pry if !@jsw_skip_pry
   repaired_manuals.sum { |sorted_man| sorted_man[sorted_man.size / 2] }
