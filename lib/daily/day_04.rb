@@ -92,5 +92,5 @@ end
 
 mas_for_x_found.select! { |el| el[1].count > 1 }
 
-binding.pry unless ans_1.check(xmas_found)
-binding.pry unless ans_2.check(mas_for_x_found.count)
+binding.pry unless ans_1.check(xmas_found) # standard:disable Lint/Debugger
+binding.pry unless ans_2.check(mas_for_x_found.count) # standard:disable Lint/Debugger

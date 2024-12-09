@@ -1,7 +1,5 @@
-ans_1 =  Answer.new(564, descr: "Number of safe Records")
-ans_2 =Answer.new(604, descr: "Safe records plus dampened safe recors")
-
-
+ans_1 = Answer.new(564, descr: "Number of safe Records")
+ans_2 = Answer.new(604, descr: "Safe records plus dampened safe recors")
 
 def safe?(arr)
   ascending = nil
@@ -56,5 +54,5 @@ line_data.each do |line|
   end
 end
 
-binding.pry unless ans_1.check(safe_recs.count)
-binding.pry unless ans_2.check(safe_recs.count + damp_recs.count)
+binding.pry unless ans_1.check(safe_recs.count) # standard:disable Lint/Debugger
+binding.pry unless ans_2.check(safe_recs.count + damp_recs.count) # standard:disable Lint/Debugger

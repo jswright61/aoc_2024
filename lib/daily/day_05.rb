@@ -131,11 +131,6 @@ good_mid_page_sum = 0
 bad_mid_page_sum = 0
 kmcbah_sorted = sort_pages(key_must_come_before_array_h, all_pages)
 page_order = kmcbah_sorted.keys.freeze
-# binding.pry if !@jsw_skip_pry
-# puts all_pages[0..10]
-# page_order = alt_sort_pages(all_pages, rule_pairs)
-# puts all_pages[0..10]
-# puts page_order[0..10]
 
 manuals.each do |man|
   manual_good = true
@@ -156,8 +151,8 @@ manuals.each do |man|
 end
 all_pages.sort!
 
-binding.pry unless ans_1.check(good_mid_page_sum)
-binding.pry unless ans_2.check(bad_mid_page_sum)
+binding.pry unless ans_1.check(good_mid_page_sum) # standard:disable Lint/Debugger
+binding.pry unless ans_2.check(bad_mid_page_sum) # standard:disable Lint/Debugger
 
 out_of_order = Ts.check_bad_manuals(bad_manuals, page_order)
 puts "Out of order: #{out_of_order}"
@@ -168,9 +163,3 @@ end
 
 bad_manuals.select { |man| man[1][..-2] == man[2] }
 # puts incorrect_mans
-
-# puts "Answer 2 must be less than 4834"
-# if answer_1 != 5509 || answer_2 != 4407
-#   puts "Answer 2 must be 4407"
-#   binding.pry if !@jsw_skip_pry
-# end

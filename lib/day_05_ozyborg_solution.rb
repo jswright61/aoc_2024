@@ -16,7 +16,6 @@ end
 
 def part_1
   rules, manuals = data
-  # binding.pry if !@jsw_skip_pry
 
   manuals.select do |man|
     man.combination(2).all? { |combo| rules.include?(combo) }
@@ -33,9 +32,8 @@ def part_2
     bad_man.permutation(2).select { |perm| rules.include?(perm) }
       .map(&:first).tally.sort_by(&:last).map(&:first).reverse
   end
-  binding.pry if !@jsw_skip_pry
+  binding.pry if !@jsw_skip_pry # standard:disable Lint/Debugger
   repaired_manuals.sum { |sorted_man| sorted_man[sorted_man.size / 2] }
 end
-# binding.pry if !@jsw_skip_pry
 puts "Part 1: #{part_1}"
 puts "Part 2: #{part_2}"

@@ -15,5 +15,5 @@ valid_mults = valid_text.scan(mult_ptn).map { |r| r.map(&:to_i) }
 valid_sum = 0
 valid_mults.each { |pair| valid_sum += pair[0] * pair[1] }
 
-binding.pry unless ans_1.check(part_1_sum)
-binding.pry unless ans_2.check(valid_sum)
+binding.pry unless ans_1.check(part_1_sum) # standard:disable Lint/Debugger
+binding.pry unless ans_2.check(valid_sum) # standard:disable Lint/Debugger

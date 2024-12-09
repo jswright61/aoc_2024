@@ -6,6 +6,5 @@ value_1, value_2 = nil, nil
 #
 # end
 
-
-binding.pry unless ans_1.check(value_1)
-binding.pry unless ans_2.check(value_2)
+binding.pry unless ans_1.check(value_1) # standard:disable Lint/Debugger
+binding.pry unless ans_2.check(value_2) # standard:disable Lint/Debugger

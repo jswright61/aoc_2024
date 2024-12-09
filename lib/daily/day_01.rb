@@ -12,7 +12,7 @@ while l1.count > 0
   dist << (l1.delete_at(l1.index(l1.min)) - r1.delete_at(r1.index(r1.min))).abs
 end
 ans_1 = Answer.new(1765812, descr: "Total distance between the lists")
-binding.pry if !ans_1.check(dist.sum)
+binding.pry if !ans_1.check(dist.sum) # standard:disable Lint/Debugger
 
 # left.each do |el|
 #   if !(count = right_counts.select { |arr| arr[0] == el }&.dig(0, 1))
@@ -34,4 +34,4 @@ left.each do |el|
 end
 
 ans_2 = Answer.new(20520794, descr: "Similarity Score")
-binding.pry if !ans_2.check(sim.sum)
+binding.pry if !ans_2.check(sim.sum) # standard:disable Lint/Debugger

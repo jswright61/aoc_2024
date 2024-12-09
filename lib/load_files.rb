@@ -1,6 +1,8 @@
 require "date"
 class LoadFiles
   attr_reader :data, :code_file, :args
+  private :get_args, :create_files
+
   def initialize
     get_args
     @data_file = "data/live/day_#{@args[:day_str]}.txt"
@@ -18,25 +20,23 @@ class LoadFiles
     end
   end
 
-  private
-
-    def get_args
-      @args = {}
-      ARGV.each do |arg|
-        if arg.to_s.to_i.to_s == arg
-          @args[:day_str] = arg.to_s.to_i.to_s.rjust(2, "0")
-        elsif arg.downcase == "sample"
-          @args[:sample] = true
-        end
+  def get_args
+    @args = {}
+    ARGV.each do |arg|
+      if arg.to_s.to_i.to_s == arg
+        @args[:day_str] = arg.to_s.to_i.to_s.rjust(2, "0")
+      elsif arg.downcase == "sample"
+        @args[:sample] = true
       end
-      @args[:day_str] ||= Date.today.day.to_s.rjust(2, "0")
-      @args[:sample] ||= false
     end
+    @args[:day_str] ||= Date.today.day.to_s.rjust(2, "0")
+    @args[:sample] ||= false
+  end
 
-    def create_files
-      # I want all the files if they don't already exist
-      File.exist?(@code_file) || FileUtils.cp("lib/daily_stub.rb",@code_file)
-      File.exist?(@data_file) || FileUtils.touch(@data_file)
-      File.exist?(@sample_data_file) || FileUtils.touch(@sample_data_file)
-    end
+  def create_files
+    # I want all the files if they don't already exist
+    File.exist?(@code_file) || FileUtils.cp("lib/daily_stub.rb", @code_file)
+    File.exist?(@data_file) || FileUtils.touch(@data_file)
+    File.exist?(@sample_data_file) || FileUtils.touch(@sample_data_file)
+  end
 end
